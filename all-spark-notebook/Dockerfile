@@ -34,3 +34,12 @@ RUN jupyter toree install --sys-prefix
 # Spylon-kernel
 RUN conda install --quiet --yes 'spylon-kernel=0.2*'
 RUN python -m spylon_kernel install --sys-prefix
+#RUN pip install avro-python3
+RUN pip install fastavro
+
+USER root
+RUN apt-get update
+RUN apt-get install -y python-snappy libsnappy-dev
+
+USER $NB_USER
+RUN pip install python-snappy
